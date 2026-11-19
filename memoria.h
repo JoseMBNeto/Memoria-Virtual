@@ -21,6 +21,9 @@ typedef struct Memoria{
     int algoritmo;
     int page_faults;
     FILE *backing_store;
+    int relogio;
+    int tempo_carga[NUM_FRAMES];
+    int ultimo_uso[NUM_FRAMES];
 } Memoria;
 
 int numero_pagina(int endereco);
@@ -28,6 +31,7 @@ int numero_offset(int endereco);
 int inicia_memoria(Memoria *mem, const char *nome_backing_store, int algoritmo);
 void fecha_memoria(Memoria *mem);
 int busca_na_tabela(Memoria *mem, int pagina, int *frame);
+void registra_uso(Memoria *mem, int frame);
 int le_valor(Memoria *mem, int frame, int offset);
 
 #endif
