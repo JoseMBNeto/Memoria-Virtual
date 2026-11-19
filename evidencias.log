@@ -1,0 +1,24 @@
+Script started on 2026-11-19 12:26:40-03:00 [COMMAND="date; whoami; pwd; bash" TERM="xterm-256color" TTY="/dev/pts/3" COLUMNS="173" LINES="12"]
+Thu Nov 19 12:26:40 -03 2026
+miltonlnx
+/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ [7mmake[27m[1Pmak[K=[K[K[Kmake
+[?2004lmake[1]: Entering directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -c main.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -c entrada.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -c memoria.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -c tlb.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -o vm main.o entrada.o memoria.o tlb.o
+make[1]: Leaving directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ [7m./vm addresses.txt lru fifo[27m./vm addresses.txt lru fifo
+[?2004lpagina: lru | TLB: fifo | enderecos: 1000
+endereco 16916 -> pagina 66, offset 20
+endereco 62493 -> pagina 244, offset 29
+endereco 30198 -> pagina 117, offset 246
+ultimo: endereco 12107 -> pagina 47, offset 75
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ [7m./vm addresses.txt LRU fifo[27m./vm addresses.txt LRU fifo
+[?2004lError: invalid page replacement algorithm "LRU" (expected fifo or lru).
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ exit
+[?2004lexit
+
+Script done on 2026-11-19 12:27:02-03:00 [COMMAND_EXIT_CODE="1"]
