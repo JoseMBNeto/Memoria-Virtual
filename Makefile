@@ -15,7 +15,7 @@ main.o: main.c entrada.h memoria.h tlb.h
 entrada.o: entrada.c entrada.h
 	$(CC) $(CFLAGS) -c entrada.c
 
-memoria.o: memoria.c memoria.h
+memoria.o: memoria.c memoria.h entrada.h
 	$(CC) $(CFLAGS) -c memoria.c
 
 tlb.o: tlb.c tlb.h
