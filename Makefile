@@ -1,5 +1,6 @@
 CC      = gcc
-CFLAGS  = -Wall -Wextra -std=c99 -pedantic -pthread
+FRAMES  = 128
+CFLAGS  = -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=$(FRAMES)
 TARGET  = vm
 OBJS    = main.o entrada.o memoria.o tlb.o
 
