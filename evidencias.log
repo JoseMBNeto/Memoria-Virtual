@@ -189,3 +189,80 @@ make[1]: Leaving directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
 [?2004lexit
 
 Script done on 2026-11-21 13:07:22-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-21 13:16:01-03:00 [COMMAND="date; whoami; pwd; bash" TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="176" LINES="22"]
+Sat Nov 21 13:16:01 -03 2026
+miltonlnx
+/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ [7mecho "===== TESTE DE ERRO ====="[27mecho "===== TESTE DE ERRO ====="
+[?2004l===== TESTE DE ERRO =====
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ [7mRANDOM=7; for k in $(seq 1 3000); do if [ $((k % 3)) -eq 0 ]; then echo $((5 * 256 + RANDOM % 256)); else echo $(( (RANDOM[27m[7m [27m[7m* 2 + RANDOM % 2) % 65536 )); fi; done > pagina_teste.txt[27m[ARANDOM=7; for k in $(seq 1 3000); do if [ $((k % 3)) -eq 0 ]; then echo $((5 * 256 + RANDOM % 256)); else echo $(( (RANDOM * 2 + RANDOM % 2) % 65536 )); fi; done > pagina_teste.txt
+[?2004l[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ [7m./vm pagina_teste.txt fifo lru[27m./vm pagina_teste.txt fifo lru
+[?2004lbash: ./vm: No such file or directory
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ make 
+[?2004lmake[1]: Entering directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c main.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c entrada.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c memoria.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c tlb.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -o vm main.o entrada.o memoria.o tlb.o
+make[1]: Leaving directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ [7m./vm pagina_teste.txt fifo lru[27m./vm pagina_teste.txt fifo lru
+[?2004l[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ [7mod -An -v -t d1 -w1 BACKING_STORE.bin > bytes.txt[27mod -An -v -t d1 -w1 BACKING_STORE.bin > bytes.txt
+[?2004l[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ [7mawk 'NR==FNR { byte[NR-1] = $1; next } /^Virtual/ { v = $3 % 65536; if ($NF != byte[v]) { errados++; if (!p) { print "PRIM[27m[7mE[27m[7mIRO ERRADO:", $0, "(certo:", byte[v] ")"; p = 1 } } } END { print "VALORES ERRADOS:", errados + 0 }' bytes.txt correct.txt[27m[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cawk 'NR==FNR { byte[NR-1] = $1; next } /^Virtual/ { v = $3 % 65536; if ($NF != byte[v]) { errados++; if (!p) { print "PRIMEIRO ERRADO:", $0, "(certo:", byte[v] ")"; p = 1 } } } END { print "VALORES ERRADOS:", errados + 0 }' bytes.txt correct.txt
+[?2004lPRIMEIRO ERRADO: Virtual address: 1323 TLB: 2 Physical address: 555 Value: -54 (certo: 74)
+VALORES ERRADOS: 416
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ exit
+[?2004lexit
+
+Script done on 2026-11-21 13:18:17-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-21 13:29:38-03:00 [COMMAND="date; whoami; pwd; bash" TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="176" LINES="22"]
+Sat Nov 21 13:29:38 -03 2026
+miltonlnx
+/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ echo [7mecho "===== TESTE CORREÇÃO ====="[27mecho "===== TESTE CORREÇÃO ====="
+[?2004lecho ===== TESTE CORREÇÃO =====
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ makle [K[K[Ke clean
+[?2004lmake[1]: Entering directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+rm -f vm main.o entrada.o memoria.o tlb.o
+make[1]: Leaving directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ make
+[?2004lmake[1]: Entering directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c main.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c entrada.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c memoria.c
+[01m[Kmemoria.c:[m[K In function ‘[01m[Kbusca_na_tabela[m[K’:
+[01m[Kmemoria.c:98:22:[m[K [01;35m[Kwarning: [m[Kassignment to ‘[01m[Kint *[m[K’ from ‘[01m[Kint[m[K’ makes pointer from integer without a cast [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wint-conversion-Wint-conversion]8;;[m[K]
+   98 |     pagina_despejada [01;35m[K=[m[K -1;
+      |                      [01;35m[K^[m[K
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c tlb.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -o vm main.o entrada.o memoria.o tlb.o
+make[1]: Leaving directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ exit
+[?2004lexit
+
+Script done on 2026-11-21 13:30:23-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-21 13:33:58-03:00 [COMMAND="date; whoami; pwd; bash" TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="176" LINES="22"]
+Sat Nov 21 13:33:58 -03 2026
+miltonlnx
+/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ [7mecho "===== TESTE CORREÇÃO ====="[27mecho "===== TESTE CORREÇÃO ====="
+[?2004l===== TESTE CORREÇÃO =====
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ make clean
+[?2004lmake[1]: Entering directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+rm -f vm main.o entrada.o memoria.o tlb.o
+make[1]: Leaving directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ make
+[?2004lmake[1]: Entering directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c main.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c entrada.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c memoria.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c tlb.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -o vm main.o entrada.o memoria.o tlb.o
+make[1]: Leaving directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ ./vm pagina_teste.txt fifo lru
+[?2004l[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ [7mawk 'NR==FNR { byte[NR-1] = $1; next } /^Virtual/ { v = $3 % 65536; if ($NF != byte[v]) { errados++; if (!p) { print "PRIM[27m[7mE[27m[7mIRO ERRADO:", $0, "(certo:", byte[v] ")"; p = 1 } } } END { print "VALORES ERRADOS:", errados + 0 }' bytes.txt correct.txt[27m[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cawk 'NR==FNR { byte[NR-1] = $1; next } /^Virtual/ { v = $3 % 65536; if ($NF != byte[v]) { errados++; if (!p) { print "PRIMEIRO ERRADO:", $0, "(certo:", byte[v] ")"; p = 1 } } } END { print "VALORES ERRADOS:", errados + 0 }' bytes.txt correct.txt
+[?2004lVALORES ERRADOS: 0
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ exit
+[?2004lexit
+
+Script done on 2026-11-21 13:34:44-03:00 [COMMAND_EXIT_CODE="0"]

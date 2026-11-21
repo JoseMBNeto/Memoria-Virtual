@@ -178,3 +178,13 @@ int tlb_insere(Tlb *tlb, int pagina, int frame){
 
     return i;
 }
+
+void tlb_invalida(Tlb *tlb, int pagina){
+    int i;
+
+    for (i = 0; i < TAMANHO_TLB; i++){
+        if (tlb->entradas[i].valida && tlb->entradas[i].pagina == pagina){
+            tlb->entradas[i].valida = 0;
+        }
+    }
+}

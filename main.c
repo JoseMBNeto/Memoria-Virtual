@@ -61,18 +61,23 @@ int main(int argc, char *argv[]){
         int offset = numero_offset(enderecos[i]);
         int frame;
         int entrada_tlb;
+        int pagina_despejada;
         entrada_tlb = tlb_busca(&tlb, pagina, &frame);
 
         if (entrada_tlb != TLB_MISS){
             registra_uso(&memoria, frame);
         }else{
-            if (!busca_na_tabela(&memoria, pagina, &frame)){
+            if (!busca_na_tabela(&memoria, pagina, &frame, &pagina_despejada)){
                 fclose(saida);
                 remove(ARQUIVO_SAIDA);
                 encerra_tlb(&tlb);
                 fecha_memoria(&memoria);
                 free(enderecos);
                 return EXIT_FAILURE;
+            }
+
+            if (pagina_despejada != -1){
+                tlb_invalida(&tlb, pagina_despejada);
             }
             entrada_tlb = tlb_insere(&tlb, pagina, frame);
         }

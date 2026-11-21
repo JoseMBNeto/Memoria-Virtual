@@ -67,7 +67,7 @@ static int escolhe_vitima(Memoria *mem){
     return vitima;
 }
 
-static int escolhe_frame(Memoria *mem){
+static int escolhe_frame(Memoria *mem, int *pagina_despejada){
     int vitima;
     int pagina_antiga;
 
@@ -76,9 +76,9 @@ static int escolhe_frame(Memoria *mem){
     }
 
     vitima = escolhe_vitima(mem);
-
     pagina_antiga = mem->pagina_do_frame[vitima];
     mem->tabela_paginas[pagina_antiga] = SEM_FRAME;
+    *pagina_despejada = pagina_antiga;
 
     return vitima;
 }
@@ -93,8 +93,9 @@ static int carrega_pagina(Memoria *mem, int pagina, int frame){
     return 1;
 }
 
-int busca_na_tabela(Memoria *mem, int pagina, int *frame){
+int busca_na_tabela(Memoria *mem, int pagina, int *frame, int *pagina_despejada){
     int novo_frame;
+    *pagina_despejada = -1;
 
     if (mem->tabela_paginas[pagina] != SEM_FRAME){
         *frame = mem->tabela_paginas[pagina];
@@ -104,7 +105,7 @@ int busca_na_tabela(Memoria *mem, int pagina, int *frame){
 
     mem->page_faults++;
 
-    novo_frame = escolhe_frame(mem);
+    novo_frame = escolhe_frame(mem, pagina_despejada);
 
     if (!carrega_pagina(mem, pagina, novo_frame)){
         fprintf(stderr, "Error: could not read page %d from the backing store (the file is too small or damaged).\n", pagina);

@@ -42,5 +42,6 @@ int inicia_tlb(Tlb *tlb, int algoritmo);
 void encerra_tlb(Tlb *tlb);
 int tlb_busca(Tlb *tlb, int pagina, int *frame);
 int tlb_insere(Tlb *tlb, int pagina, int frame);
+void tlb_invalida(Tlb *tlb, int pagina);
 
 #endif

@@ -30,7 +30,7 @@ int numero_pagina(int endereco);
 int numero_offset(int endereco);
 int inicia_memoria(Memoria *mem, const char *nome_backing_store, int algoritmo);
 void fecha_memoria(Memoria *mem);
-int busca_na_tabela(Memoria *mem, int pagina, int *frame);
+int busca_na_tabela(Memoria *mem, int pagina, int *frame, int *pagina_despejada);
 void registra_uso(Memoria *mem, int frame);
 int le_valor(Memoria *mem, int frame, int offset);
 
