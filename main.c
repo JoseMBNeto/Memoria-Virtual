@@ -31,7 +31,21 @@ int main(int argc, char *argv[]){
         return EXIT_FAILURE;
     }
     
-    inicia_tlb(&tlb, alg_tlb);
+    if (!inicia_tlb(&tlb, alg_tlb)){
+        encerra_tlb(&tlb);
+        fecha_memoria(&memoria);
+        free(enderecos);
+        return EXIT_FAILURE;
+    }
+
+    saida = fopen(ARQUIVO_SAIDA, "w");
+    if (saida == NULL){
+        fprintf(stderr, "Error: could not create %s.\n", ARQUIVO_SAIDA);
+        encerra_tlb(&tlb);
+        fecha_memoria(&memoria);
+        free(enderecos);
+        return EXIT_FAILURE;
+    }
 
     saida = fopen(ARQUIVO_SAIDA, "w");
 
@@ -55,6 +69,7 @@ int main(int argc, char *argv[]){
             if (!busca_na_tabela(&memoria, pagina, &frame)){
                 fclose(saida);
                 remove(ARQUIVO_SAIDA);
+                encerra_tlb(&tlb);
                 fecha_memoria(&memoria);
                 free(enderecos);
                 return EXIT_FAILURE;
@@ -70,6 +85,7 @@ int main(int argc, char *argv[]){
     fprintf(saida, "Page Fault Rate = %.3f\n", (double)memoria.page_faults / quantidade);
     fprintf(saida, "TLB Hits = %d\n", tlb.hits);
     fprintf(saida, "TLB Hit Rate = %.3f\n", (double)tlb.hits / quantidade);
+    encerra_tlb(&tlb);
     fecha_memoria(&memoria);
     free(enderecos);
 
