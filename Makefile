@@ -24,7 +24,10 @@ tlb.o: tlb.c tlb.h entrada.h
 log:
 	script -a evidencias.log -c "date; whoami; pwd; bash"
 
+teste: $(TARGET)
+	script -a evidencias.log -c "date; whoami; pwd; bash testes.sh"
+
 clean:
 	rm -f $(TARGET) $(OBJS)
 
-.PHONY: all clean log
+.PHONY: all clean log teste
