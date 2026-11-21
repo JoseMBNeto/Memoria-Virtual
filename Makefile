@@ -18,7 +18,7 @@ entrada.o: entrada.c entrada.h
 memoria.o: memoria.c memoria.h entrada.h
 	$(CC) $(CFLAGS) -c memoria.c
 
-tlb.o: tlb.c tlb.h
+tlb.o: tlb.c tlb.h entrada.h
 	$(CC) $(CFLAGS) -c tlb.c
 
 log:
