@@ -132,3 +132,39 @@ TLB Hit Rate = 0.000
 [?2004lexit
 
 Script done on 2026-11-19 16:28:40-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-21 12:16:15-03:00 [COMMAND="date; whoami; pwd; bash" TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="176" LINES="11"]
+Sat Nov 21 12:16:15 -03 2026
+miltonlnx
+/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ make [K clean
+[?2004lmake[1]: Entering directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+rm -f vm main.o entrada.o memoria.o tlb.o
+make[1]: Leaving directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ make [K\
+[?2004l[?2004h> make
+[?2004lmakemake: command not found
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ make
+[?2004lmake[1]: Entering directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c main.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c entrada.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c memoria.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c tlb.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -o vm main.o entrada.o memoria.o tlb.o
+make[1]: Leaving directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ ./vm addresses.txt lru fifo
+[?2004l[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ [7m./vm addresses.txt lru lru && tail -5 correct.txt[27m./vm addresses.txt lru lru && tail -5 correct.txt
+[?2004lNumber of Translated Addresses = 1000
+Page Faults = 539
+Page Fault Rate = 0.539
+TLB Hits = 55
+TLB Hit Rate = 0.055
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ [7m./vm addresses.txt fifo lru && tail -5 correct.txt[27m./vm addresses.txt fifo lru && tail -5 correct.txt
+[?2004lNumber of Translated Addresses = 1000
+Page Faults = 538
+Page Fault Rate = 0.538
+TLB Hits = 55
+TLB Hit Rate = 0.055
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ exit
+[?2004lexit
+
+Script done on 2026-11-21 12:17:04-03:00 [COMMAND_EXIT_CODE="0"]
