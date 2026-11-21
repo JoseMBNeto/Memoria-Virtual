@@ -168,3 +168,24 @@ TLB Hit Rate = 0.055
 [?2004lexit
 
 Script done on 2026-11-21 12:17:04-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-21 13:06:51-03:00 [COMMAND="date; whoami; pwd; bash" TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="176" LINES="22"]
+Sat Nov 21 13:06:51 -03 2026
+miltonlnx
+/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ make clean
+[?2004lmake[1]: Entering directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+rm -f vm main.o entrada.o memoria.o tlb.o
+make[1]: Leaving directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ make
+[?2004lmake[1]: Entering directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c main.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c entrada.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c memoria.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -c tlb.c
+gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 -o vm main.o entrada.o memoria.o tlb.o
+make[1]: Leaving directory '/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn'
+[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ [7m./vm addresses.txt lru fifo[27m./vm addresses.txt lru fifo
+[?2004l[?2004h]0;miltonlnx@Miltoneto: ~/Infra-SFT/Memoria-Virtual/jmbn[01;32mmiltonlnx@Miltoneto[00m:[01;34m~/Infra-SFT/Memoria-Virtual/jmbn[00m$ ./vm addresses.txt lru fifo[K[K[K[Kexit
+[?2004lexit
+
+Script done on 2026-11-21 13:07:22-03:00 [COMMAND_EXIT_CODE="0"]
