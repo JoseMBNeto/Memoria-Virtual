@@ -443,3 +443,171 @@ Error: could not read page 66 from the backing store (the file is too small or d
 ==============================================================
 
 Script done on 2026-11-21 13:39:48-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-24 17:37:53-03:00 [COMMAND="date; whoami; pwd; bash testes.sh" TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="176" LINES="22"]
+Tue Nov 24 17:37:53 -03 2026
+miltonlnx
+/home/miltonlnx/Infra-SFT/Memoria-Virtual/jmbn
+==============================================================
+ COMPILANDO (128 e 256 frames, na pasta testes_tmp)
+==============================================================
+$ gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=128 *.c -o testes_tmp/vm128
+$ gcc -Wall -Wextra -std=c99 -pedantic -pthread -DNUM_FRAMES=256 *.c -o testes_tmp/vm256
+==============================================================
+ 1. ARQUIVO DO PROFESSOR
+==============================================================
+$ ./vm addresses.txt lru fifo   (128 frames)
+>> OK: saida IDENTICA ao correct.txt do professor (sem as estatisticas)
+$ ./vm addresses.txt lru lru   (128 frames)
+>> OK: lru lru: 1000 linhas, todos os valores corretos
+$ ./vm addresses.txt fifo fifo   (128 frames)
+>> OK: fifo fifo: 1000 linhas, todos os valores corretos
+$ ./vm addresses.txt fifo lru   (128 frames)
+>> OK: fifo lru: 1000 linhas, todos os valores corretos
+$ ./vm addresses.txt lru fifo   (256 frames)
+>> OK: lru fifo com 256 frames: 1000 linhas, todos os valores corretos
+$ ./vm addresses.txt fifo fifo   (256 frames)
+>> OK: fifo fifo com 256 frames: 1000 linhas, todos os valores corretos
+--------------------------------------------------------------
+TESTE: 20 execucoes seguidas com threads (o resultado nao pode mudar)
+>> OK: 20 de 20 execucoes identicas ao professor
+==============================================================
+ 2. ARGUMENTOS DA LINHA DE COMANDO
+==============================================================
+--------------------------------------------------------------
+TESTE: sem argumentos
+$ ./vm 
+Error: expected 3 arguments, but got 0.
+Usage: ./vm128 <addresses file> <fifo|lru (page replacement)> <fifo|lru (TLB replacement)>
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: so o arquivo
+$ ./vm e.txt
+Error: expected 3 arguments, but got 1.
+Usage: ./vm128 <addresses file> <fifo|lru (page replacement)> <fifo|lru (TLB replacement)>
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: faltando o algoritmo da TLB
+$ ./vm e.txt lru
+Error: expected 3 arguments, but got 2.
+Usage: ./vm128 <addresses file> <fifo|lru (page replacement)> <fifo|lru (TLB replacement)>
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: argumento a mais
+$ ./vm e.txt lru fifo extra
+Error: expected 3 arguments, but got 4.
+Usage: ./vm128 <addresses file> <fifo|lru (page replacement)> <fifo|lru (TLB replacement)>
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: algoritmo em maiusculas (LRU)
+$ ./vm e.txt LRU fifo
+Error: invalid page replacement algorithm "LRU" (expected fifo or lru).
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: algoritmo da TLB invalido (opt)
+$ ./vm e.txt lru opt
+Error: invalid TLB replacement algorithm "opt" (expected fifo or lru).
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: arquivo de enderecos nao existe
+$ ./vm e.txt lru fifo
+Error: could not open e.txt (it does not exist or cannot be read).
+>> OK: codigo de saida 1
+==============================================================
+ 3. ARQUIVO DE ENDERECOS
+==============================================================
+--------------------------------------------------------------
+TESTE: arquivo vazio
+$ ./vm e.txt lru fifo
+Error: e.txt has no addresses.
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: so linhas vazias
+$ ./vm e.txt lru fifo
+Error: e.txt has no addresses.
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: letra (1691a)
+$ ./vm e.txt lru fifo
+Error: e.txt line 2: "1691a" is not a valid address (expected one non-negative integer per line).
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: negativo (-5)
+$ ./vm e.txt lru fifo
+Error: e.txt line 1: "-5" is not a valid address (expected one non-negative integer per line).
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: sinal + (+5)
+$ ./vm e.txt lru fifo
+Error: e.txt line 1: "+5" is not a valid address (expected one non-negative integer per line).
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: decimal (5.0)
+$ ./vm e.txt lru fifo
+Error: e.txt line 1: "5.0" is not a valid address (expected one non-negative integer per line).
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: dois numeros na linha
+$ ./vm e.txt lru fifo
+Error: e.txt line 1: "16916 62493" is not a valid address (expected one non-negative integer per line).
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: maior que um int
+$ ./vm e.txt lru fifo
+Error: e.txt line 1: "99999999999" is not a valid address (expected one non-negative integer per line).
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: linha vazia no meio
+$ ./vm e.txt lru fifo
+Error: e.txt line 2: empty line (empty lines are only allowed at the end of the file).
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: espacos e tabs em volta (valido)
+$ ./vm e.txt lru fifo
+>> OK: codigo de saida 0
+Virtual address: 16916 TLB: 0 Physical address: 20 Value: 0
+Virtual address: 62493 TLB: 1 Physical address: 285 Value: 0
+--------------------------------------------------------------
+TESTE: quebra de linha Windows (valido)
+$ ./vm e.txt lru fifo
+>> OK: codigo de saida 0
+Virtual address: 16916 TLB: 0 Physical address: 20 Value: 0
+Virtual address: 62493 TLB: 1 Physical address: 285 Value: 0
+--------------------------------------------------------------
+TESTE: linhas vazias no fim (valido)
+$ ./vm e.txt lru fifo
+>> OK: codigo de saida 0
+Virtual address: 16916 TLB: 0 Physical address: 20 Value: 0
+--------------------------------------------------------------
+TESTE: sem quebra de linha na ultima linha (valido)
+$ ./vm e.txt lru fifo
+>> OK: codigo de saida 0
+Virtual address: 16916 TLB: 0 Physical address: 20 Value: 0
+Virtual address: 62493 TLB: 1 Physical address: 285 Value: 0
+--------------------------------------------------------------
+TESTE: maior que 65535: usa 16 bits (valido)
+$ ./vm e.txt lru fifo
+>> OK: codigo de saida 0
+Virtual address: 70000 TLB: 0 Physical address: 112 Value: 0
+>> OK: 70000 virou pagina 17, offset 112 (frame 0 -> fisico 112)
+==============================================================
+ 4. BACKING_STORE.bin
+==============================================================
+--------------------------------------------------------------
+TESTE: BACKING_STORE.bin nao existe
+$ ./vm e.txt lru fifo
+Error: could not open BACKING_STORE.bin (it does not exist or cannot be read).
+>> OK: codigo de saida 1
+--------------------------------------------------------------
+TESTE: BACKING_STORE.bin pequeno (1000 bytes)
+$ ./vm e.txt lru fifo
+Error: could not read page 66 from the backing store (the file is too small or damaged).
+>> OK: codigo de saida 1
+==============================================================
+ 5. FORCA BRUTA (arquivos aleatorios, as 4 combinacoes)
+==============================================================
+>> OK: 10 arquivos aleatorios x 2 tamanhos de memoria x 4 combinacoes: todos os valores corretos
+==============================================================
+ RESUMO: 32 passaram, 0 falharam
+==============================================================
+
+Script done on 2026-11-24 17:39:37-03:00 [COMMAND_EXIT_CODE="0"]
